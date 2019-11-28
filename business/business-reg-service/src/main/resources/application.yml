@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: business-reg
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.10.134:8848
+
+dubbo:
+  scan:
+    base-packages: com.xiayu.demo.business.controller
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: kryo
+  registry:
+    address: nacos://192.168.10.134:8848
+    provider:
+      loadbalance: roundrobin  #负载均衡方式  轮循
+      # random 随机，roundrobin 轮循，leastactive 最少活跃调用数，consistenthash一致性 Hash
+
+server:
+  # ${random.int[9000,9999]} 随机端口
+  port: 9001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

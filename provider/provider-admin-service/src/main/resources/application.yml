@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: user-admin-provider
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://139.155.87.157:3306/personal?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+dubbo:
+  scan:
+    base-packages: com.xiayu.demo.provider.service
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: kryo
+  registry:
+    address: nacos://192.168.10.134:8848
+    provider:
+      loadbalance: roundrobin  #负载均衡方式  轮循
+      # random 随机，roundrobin 轮循，leastactive 最少活跃调用数，consistenthash一致性 Hash
+
+mybatis:
+  type-aliases-package:  com.xiayu.demo.provider.api.domain
+  mapper-locations: classpath:mapper/*.xml
