@@ -44,11 +44,18 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spring Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
         <!-- Spring Cloud Alibaba -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
 
         <!-- Projects -->
         <dependency>
@@ -56,6 +63,8 @@
             <artifactId>provider-admin-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+
     </dependencies>
 
     <build>

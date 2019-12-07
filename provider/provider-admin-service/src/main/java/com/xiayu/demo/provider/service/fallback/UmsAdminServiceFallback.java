@@ -1,7 +1,7 @@
 package com.xiayu.demo.provider.service.fallback;
 
 
-import com.xiayu.demo.provider.domain.UmsAdmin;
+import com.xiayu.demo.provider.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,9 +22,9 @@ public class UmsAdminServiceFallback {
      *
      * @param username {@code String} 用户名
      * @param ex       {@code Throwable} 异常信息
-     * @return {@link UmsAdmin} 熔断后的固定结果
+     * @return {@link User} 熔断后的固定结果
      */
-    public static UmsAdmin getByUsernameFallback(String username, Throwable ex) {
+    public static User getByUsernameFallback(String username, Throwable ex) {
         logger.warn("Invoke getByUsernameFallback: " + ex.getClass().getTypeName());
         ex.printStackTrace();
         return null;

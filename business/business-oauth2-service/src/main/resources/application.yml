@@ -1,6 +1,6 @@
 spring:
   application:
-    name: business-reg
+    name: business-oauth2-service
   main:
     allow-bean-definition-overriding: true
   jackson:
@@ -10,7 +10,6 @@ spring:
     nacos:
       discovery:
         server-addr: 139.155.87.157:8848
-
 dubbo:
   scan:
     base-packages: com.xiayu.demo.business.controller
@@ -25,9 +24,7 @@ dubbo:
       # random 随机，roundrobin 轮循，leastactive 最少活跃调用数，consistenthash一致性 Hash
 
 server:
-  # ${random.int[9000,9999]} 随机端口
-  port: 9001
-
+  port: 9002
 management:
   endpoints:
     web:

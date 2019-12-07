@@ -1,7 +1,6 @@
 package com.xiayu.demo.provider.api;
 
 
-import com.xiayu.demo.provider.domain.UmsAdmin;
 import com.xiayu.demo.provider.domain.User;
 
 
@@ -26,15 +25,15 @@ public interface UserAdminService {
      * 获取用户
      *
      * @param username 用户名
-     * @return {@link UmsAdmin}
+     * @return {@link User}
      */
     User get(String username);
 
     /**
      * 获取用户
      *
-     * @param user {@link UmsAdmin}
-     * @return {@link UmsAdmin}
+     * @param user {@link User}
+     * @return {@link User}
      */
     User get(User user);
 

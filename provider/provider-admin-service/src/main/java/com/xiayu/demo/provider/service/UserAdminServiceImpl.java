@@ -2,7 +2,6 @@ package com.xiayu.demo.provider.service;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.xiayu.demo.provider.api.UserAdminService;
-import com.xiayu.demo.provider.domain.UmsAdmin;
 import com.xiayu.demo.provider.domain.User;
 import com.xiayu.demo.provider.mapper.UserMapper;
 import org.apache.dubbo.config.annotation.Service;
@@ -49,7 +48,7 @@ public class UserAdminServiceImpl implements UserAdminService {
      * 3. 如果不设置 {@link SentinelResource#fallbackClass()}，则需要在当前类中创建一个 `Fallback` 函数，函数签名与原函数一致或加一个 {@link Throwable} 类型的参数
      * </p>
      * @param username {@code String} 用户名
-     * @return {@link UmsAdmin}
+     * @return {@link User}
      */
     @Override
     //@SentinelResource(value = "getByUsername", fallback = "getByUsernameFallback", fallbackClass = UmsAdminServiceFallback.class)
@@ -64,8 +63,8 @@ public class UserAdminServiceImpl implements UserAdminService {
     /**
      * 获取用户
      *
-     * @param user {@link UmsAdmin}
-     * @return {@link UmsAdmin}
+     * @param user {@link User}
+     * @return {@link User}
      */
     @Override
     public User get(User user) {
@@ -78,7 +77,7 @@ public class UserAdminServiceImpl implements UserAdminService {
      * 仅允许更新 邮箱、昵称、备注、状态
      * </p>
      *
-     * @param umsAdmin {@link UmsAdmin}
+     * @param umsAdmin {@link User}
      * @return {@code int} 大于 0 则表示更新成功
      */
     @Override

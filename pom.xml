@@ -31,7 +31,7 @@
 
         <!-- <module>gateway</module>-->
 
-        <!-- <module>cloud</module>-->
+         <module>cloud</module>
 
         <!-- <module>message</module>-->
     </modules>
