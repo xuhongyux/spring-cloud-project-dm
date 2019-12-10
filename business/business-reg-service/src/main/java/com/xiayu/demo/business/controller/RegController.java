@@ -4,7 +4,7 @@ package com.xiayu.demo.business.controller;
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;
 import com.xiayu.demo.provider.api.UserAdminService;
 import com.xiayu.demo.provider.domain.User;
-
+import io.swagger.annotations.Api;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "reg")
+@Api(value = "/23213")
 public class RegController {
 
     @Reference(version = "1.0.0")

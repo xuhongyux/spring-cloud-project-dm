@@ -25,6 +25,7 @@ dubbo:
 
 server:
   port: 9002
+
 management:
   endpoints:
     web:

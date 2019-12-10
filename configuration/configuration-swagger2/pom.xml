@@ -5,12 +5,13 @@
 
     <parent>
         <groupId>com.xiayu.project.demo</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>configuration</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>configuration</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>configuration-swagger2</artifactId>
+    <packaging>jar</packaging>
+
 
     <licenses>
         <license>
@@ -28,9 +29,19 @@
         </developer>
     </developers>
 
-    <modules>
-        <module>configuration-feign</module>
-        <module>configuration-sentinel</module>
-        <module>configuration-swagger2</module>
-    </modules>
+    <dependencies>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+
+        </dependency>
+
+    </dependencies>
 </project>

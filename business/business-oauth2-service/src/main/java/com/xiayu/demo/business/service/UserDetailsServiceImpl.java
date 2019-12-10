@@ -29,13 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         List<GrantedAuthority> grantedAuthorities = Lists.newArrayList();
-       // GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("APP");
-     //   grantedAuthorities.add(grantedAuthority);
         return new User(USERNAME, PASSWORD, grantedAuthorities);
     }
-
-
-
 
 
    /* private static final String USERNAME = "admin";
