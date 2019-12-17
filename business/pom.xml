@@ -90,8 +90,8 @@
 
         <module>business-oauth2-service</module>
 
-        <!--  <module>business-profile-feign</module>-->
+        <module>business-profile-feign</module>
 
-        <!--  <module>business-profile-service</module>-->
+        <module>business-profile-service</module>
     </modules>
 </project>

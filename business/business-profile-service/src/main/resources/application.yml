@@ -1,6 +1,6 @@
 spring:
   application:
-    name: business-oauth2-service
+    name: business-profile
   main:
     allow-bean-definition-overriding: true
   jackson:
@@ -12,7 +12,7 @@ spring:
         server-addr: 139.155.87.157:8848
 dubbo:
   scan:
-    base-packages: com.xiayu.demo.business.controller,com.xiayu.demo.business.service
+    base-packages: com.xiayu.demo.busines.controller
   protocol:
     name: dubbo
     port: -1
@@ -24,23 +24,21 @@ dubbo:
       # random 随机，roundrobin 轮循，leastactive 最少活跃调用数，consistenthash一致性 Hash
 
 server:
-  port: 9002
+  port: 9003
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-#外部配置
-business:
-  oauth2:
-    grant_type: password
-    client_id: client
-    client_secret: secret
 
-# 开启 Feign 的 OKHttp 方式
-feign:
-  okhttp:
-    enabled: true
-  httpclient:
-    enabled: false
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:9002/oauth/token
+      user-authorization-uri: http://localhost:9002/oauth/authorize
+    resource:
+      token-info-uri:  http://localhost:9002/oauth/check_token
