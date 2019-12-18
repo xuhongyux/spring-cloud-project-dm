@@ -1,5 +1,6 @@
 package com.xiayu.demo.busines.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;
 import com.xiayu.demo.provider.api.UserAdminService;
 import com.xiayu.demo.provider.domain.User;
@@ -29,7 +30,7 @@ public class ProfileController {
      * @return {@link ResponseResult}
      */
    // @SentinelResource(value = "info", fallback = "infoFallback", fallbackClass = ProfileControllerFallback.class)
-    //@SentinelResource(value = "info", fallback = "infoFallback")
+    @SentinelResource(value = "info", fallback = "infoFallback")
     @GetMapping(value = "info/{username}")
     public ResponseResult<User> info(@PathVariable String username) {
         User umsAdmin = umsAdminService.get(username);

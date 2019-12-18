@@ -10,6 +10,7 @@ import com.xiayu.demo.configuration.business.BusinessStatus;
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;
 import com.xiayu.demo.configuration.commons.utils.MapperUtils;
 import com.xiayu.demo.configuration.commons.utils.OkHttpClientUtil;
+import com.xiayu.demo.provider.domain.User;
 import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -56,7 +57,7 @@ public class LoginController {
 
     @Resource
     public TokenStore tokenStore;
-  //todo 错误
+
     @Resource
     private ProfileFeign profileFeign;
 
@@ -103,11 +104,11 @@ public class LoginController {
         // 获取认证信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // 获取个人信息
-        //String jsonString = profileFeign.info(authentication.getName());
-        //User umsAdmin = MapperUtils.json2pojoByTree(jsonString, "data", User.class);
+        String jsonString = profileFeign.info(authentication.getName());
+        User umsAdmin = MapperUtils.json2pojoByTree(jsonString, "data", User.class);
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setName(authentication.getName());
-       // loginInfo.setNickName(umsAdmin.getUsername());
+        loginInfo.setNickName(umsAdmin.getUsername());
         return  new ResponseResult<LoginInfo>(ResponseResult.CodeStatus.OK,"获取用户信息",loginInfo);
     }
     @PostMapping(value =  "/user/logout")

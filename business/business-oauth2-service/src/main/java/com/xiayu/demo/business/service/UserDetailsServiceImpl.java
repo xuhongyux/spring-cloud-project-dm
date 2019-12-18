@@ -19,17 +19,12 @@ import java.util.List;
  * <p>
  * Description:
  * </p>
- *
- *
  */
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-
-
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "$2a$10$fe2B/M.YvJZYLOvQ5BQzH.Ny79rrYxxVW8mi5Inm9ElpQQ1K4bk2O";
-
 
     @Reference(version = "1.0.0")
     private UserAdminService umsAdminService;

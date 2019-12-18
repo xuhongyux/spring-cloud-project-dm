@@ -42,3 +42,10 @@ security:
       user-authorization-uri: http://localhost:9002/oauth/authorize
     resource:
       token-info-uri:  http://localhost:9002/oauth/check_token
+
+# 开启 Feign 的 OKHttp 方式
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
