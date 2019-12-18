@@ -32,7 +32,7 @@ management:
       exposure:
         include: "*"
 
-
+#//oauth 配置
 security:
   oauth2:
     client:

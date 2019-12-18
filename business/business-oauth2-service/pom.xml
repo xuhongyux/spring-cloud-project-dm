@@ -120,6 +120,16 @@
         </dependency>
 
         <!-- Projects Begin -->
+        <dependency>
+            <groupId>com.xiayu.project.demo</groupId>
+            <artifactId>commons-dto</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xiayu.project.demo</groupId>
+            <artifactId>commons-utils</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.xiayu.project.demo</groupId>

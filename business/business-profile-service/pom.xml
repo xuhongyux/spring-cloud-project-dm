@@ -128,7 +128,6 @@
             <artifactId>provider-admin-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-
         <!-- Projects End -->
     </dependencies>
     <build>
@@ -137,7 +136,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xiayu.demo.business.BusinessProfileApplication</mainClass>
+                    <mainClass>com.xiayu.demo.busines.BusinessProfileApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

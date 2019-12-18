@@ -16,7 +16,6 @@ import java.util.Enumeration;
  * Description: 用于设置请求头，传递 Token
  * </p>
  *
-
  */
 public class FeignRequestInterceptor implements RequestInterceptor {
     @Override

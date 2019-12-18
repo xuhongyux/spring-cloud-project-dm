@@ -14,7 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients
-@SpringBootApplication(scanBasePackageClasses = {BusinessOAuth2Application.class})
+@SpringBootApplication(scanBasePackageClasses = {BusinessOAuth2Application.class},scanBasePackages = "com.xiayu.demo.business.feign")
 public class BusinessOAuth2Application {
     public static void main(String[] args) {
         SpringApplication.run(BusinessOAuth2Application.class, args);

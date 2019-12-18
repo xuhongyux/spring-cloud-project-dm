@@ -4,6 +4,7 @@ package com.xiayu.demo.business.controller;
 import com.google.common.collect.Maps;
 import com.xiayu.demo.business.dto.LoginInfo;
 import com.xiayu.demo.business.dto.LoginParam;
+import com.xiayu.demo.business.feign.ProfileFeign;
 import com.xiayu.demo.configuration.business.BusinessException;
 import com.xiayu.demo.configuration.business.BusinessStatus;
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;
@@ -55,10 +56,9 @@ public class LoginController {
 
     @Resource
     public TokenStore tokenStore;
-
-/*   //todo 错误
+  //todo 错误
     @Resource
-    private ProfileFeign profileFeign;*/
+    private ProfileFeign profileFeign;
 
     @PostMapping(value = "/user/login")
     public ResponseResult login(@RequestBody LoginParam loginParam, HttpServletRequest request){
@@ -96,7 +96,6 @@ public class LoginController {
     }
     /**
      * 获取用户信息
-     *
      * @return {@link ResponseResult}
      */
     @GetMapping(value = "/user/info")
@@ -104,8 +103,8 @@ public class LoginController {
         // 获取认证信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // 获取个人信息
-       // String jsonString = profileFeign.info(authentication.getName());
-       // User umsAdmin = MapperUtils.json2pojoByTree(jsonString, "data", User.class);
+        //String jsonString = profileFeign.info(authentication.getName());
+        //User umsAdmin = MapperUtils.json2pojoByTree(jsonString, "data", User.class);
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setName(authentication.getName());
        // loginInfo.setNickName(umsAdmin.getUsername());
@@ -122,7 +121,6 @@ public class LoginController {
         tokenStore.removeAccessToken(oAuth2AccessToken);
         return  new ResponseResult<Void>(ResponseResult.CodeStatus.OK,"用户注销",null);
     }
-
    /* *//**
      * 获取用户信息
      *

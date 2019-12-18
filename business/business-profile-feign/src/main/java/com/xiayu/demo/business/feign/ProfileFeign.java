@@ -1,4 +1,4 @@
-package com.xiayu.demo.feign;
+package com.xiayu.demo.business.feign;
 
 
 import com.xiayu.demo.business.dto.params.IconParam;
@@ -27,16 +27,6 @@ public interface ProfileFeign {
      */
     @GetMapping(value = "info/{username}")
     String info(@PathVariable String username);
-
-
-
-
-
-
-
-
-
-
 
 
 

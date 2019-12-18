@@ -1,6 +1,5 @@
 package com.xiayu.demo.busines.controller;
 
-import com.xiayu.demo.business.dto.UmsAdminDTO;
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;
 import com.xiayu.demo.provider.api.UserAdminService;
 import com.xiayu.demo.provider.domain.User;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Description:
+ * Description: 个人信息管理
  *
  * @version v1.0.0
  * @Author xiayu
@@ -29,18 +28,12 @@ public class ProfileController {
      * @param username {@code String} 用户名
      * @return {@link ResponseResult}
      */
-    @GetMapping(value = "info/{username}")
    // @SentinelResource(value = "info", fallback = "infoFallback", fallbackClass = ProfileControllerFallback.class)
     //@SentinelResource(value = "info", fallback = "infoFallback")
-    public ResponseResult<UmsAdminDTO> info(@PathVariable String username) {
+    @GetMapping(value = "info/{username}")
+    public ResponseResult<User> info(@PathVariable String username) {
         User umsAdmin = umsAdminService.get(username);
-        UmsAdminDTO dto = new UmsAdminDTO();
-        //BeanUtils.copyProperties(umsAdmin, dto);
-        String username1 = umsAdmin.getUsername();
-        String name = umsAdmin.getName();
 
-        dto.setUsername(username1);
-        dto.setEmail(name);
-        return new ResponseResult<UmsAdminDTO>(ResponseResult.CodeStatus.OK, "获取个人信息", dto);
+        return new ResponseResult<User>(ResponseResult.CodeStatus.OK, "查询用户信息", umsAdmin);
     }
 }
