@@ -7,7 +7,6 @@ import com.xiayu.demo.provider.domain.User;
 import io.swagger.annotations.Api;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  */
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "reg")
-@Api(value = "/23213")
+@Api(value = "/user")
 public class RegController {
 
     @Reference(version = "1.0.0")

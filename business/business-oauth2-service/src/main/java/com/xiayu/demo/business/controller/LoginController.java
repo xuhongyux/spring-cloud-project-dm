@@ -122,6 +122,11 @@ public class LoginController {
         tokenStore.removeAccessToken(oAuth2AccessToken);
         return  new ResponseResult<Void>(ResponseResult.CodeStatus.OK,"用户注销",null);
     }
+    @PostMapping(value =  "/user/test")
+    public void  test(String string){
+        throw new BusinessException(BusinessStatus.ADMIN_PASSWORD);
+        //throw new BusinessException(BusinessStatus.ADMIN_PASSWORD,"测试错误日志");
+    }
    /* *//**
      * 获取用户信息
      *

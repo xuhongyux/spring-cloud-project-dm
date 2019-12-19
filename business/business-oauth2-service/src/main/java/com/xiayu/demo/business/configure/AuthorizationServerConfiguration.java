@@ -17,8 +17,11 @@
 package com.xiayu.demo.business.configure;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -26,8 +29,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import javax.sql.DataSource;
 
 /**
  * 认证服务器
@@ -39,11 +45,13 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
+    /*缓存模式*/
+
+
+   /* @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    /**
-     * 注入用于支持 password 模式
-     */
+
+    // 注入用于支持 password 模式
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -69,12 +77,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .allowFormAuthenticationForClients();
     }
 
-    /**
-     * 配置客户端
-     *
-     * @param clients
-     * @throws Exception
-     */
+     //配置客户端
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
@@ -94,8 +97,59 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .accessTokenValiditySeconds(60 * 60 * 24)
                 // 设置刷新令牌的有效期，这里是 30 天
                 .refreshTokenValiditySeconds(60 * 60 * 24 * 30);
+    }*/
+
+
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~美妙的波浪线~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    /*JDBC*/
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    //注入用于支持 password 模式
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        // 配置数据源（注意，使用的是 HikariCP 连接池），以上注解是指定数据源，否则会有冲突
+        return DataSourceBuilder.create().build();
+    }
+    @Bean
+    public TokenStore tokenStore() {
+        // 基于 JDBC 实现，令牌保存到数据库
+        return new JdbcTokenStore(dataSource());
+    }
+    @Bean
+    public ClientDetailsService jdbcClientDetailsService() {
+        // 基于 JDBC 实现，需要事先在数据库配置客户端信息
+        return new JdbcClientDetailsService(dataSource());
+    }
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints
+                // 用于支持密码模式
+                .authenticationManager(authenticationManager)
+                .tokenStore(tokenStore());
+    }
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security
+                // 允许客户端访问 /oauth/check_token 检查 token
+                .checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients();
+    }
+    //配置客户端
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        // 客户端配置
+        clients.withClientDetails(jdbcClientDetailsService());
     }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~美丽的波浪线~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+    /*Redis*/
 /*    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -118,8 +172,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Bean
     public TokenStore tokenStore() {
-        // 基于 JDBC 实现，令牌保存到数据库
-//        return new JdbcTokenStore(dataSource());
+        // 基于 redis 实现，令牌保存到数据库
         return new RedisTokenStore(redisConnectionFactory);
     }
 

@@ -5,12 +5,13 @@
 
     <parent>
         <groupId>com.xiayu.project.demo</groupId>
-        <artifactId>commons</artifactId>
+        <artifactId>provider</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>commons-provider</artifactId>
+    <artifactId>provider-admin-login-log-api</artifactId>
     <packaging>jar</packaging>
+    <inceptionYear>2018-Now</inceptionYear>
 
     <licenses>
         <license>
@@ -18,6 +19,13 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
     <!--开发者个人信息-->
     <developers>
@@ -27,27 +35,4 @@
             <email>xiayuxuxu@qq.com</email>
         </developer>
     </developers>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 </project>
