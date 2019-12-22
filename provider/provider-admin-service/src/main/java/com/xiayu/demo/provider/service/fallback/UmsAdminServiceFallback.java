@@ -6,12 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 用户服务提供者熔断器
- * <p>
  * Description:
- * </p>
- *
-
+ *用户服务提供者
+ * @version v1.0.0
+ * @Author xiayu
+ * @Date 2019/12/22 16:31
  */
 public class UmsAdminServiceFallback {
 

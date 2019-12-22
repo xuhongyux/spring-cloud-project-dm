@@ -1,4 +1,4 @@
-package com.xiayu.demo.configuration.business;
+package com.xiayu.demo.business;
 
 
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;

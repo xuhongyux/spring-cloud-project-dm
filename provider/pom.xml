@@ -85,7 +85,6 @@
         </dependency>
 
         <!-- Projects -->
-
         <dependency>
             <groupId>com.xiayu.project.demo</groupId>
             <artifactId>configuration-sentinel</artifactId>
@@ -95,6 +94,12 @@
         <dependency>
             <groupId>com.xiayu.project.demo</groupId>
             <artifactId>commons-provider</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xiayu.project.demo</groupId>
+            <artifactId>configuration-sentinel</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

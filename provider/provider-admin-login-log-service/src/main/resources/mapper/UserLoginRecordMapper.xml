@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiayu.demo.provicer.mapper.UserLoginRecordMapper">
+    <select id="queryUserList" resultType="com.xiayu.demo.provicer.api.domain.UserLoginRecord">
+    select * from user
+    </select>
+    <select id="findUserById" resultType="com.xiayu.demo.provicer.api.domain.UserLoginRecord">
+    SELECT * FROM user
+      where
+      id=#{Id}
+    </select>
+
+    <select id="findUerByName" resultType="com.xiayu.demo.provicer.api.domain.UserLoginRecord">
+    SELECT * FROM user
+      where
+      username=#{name}
+    </select>
+
+    <!--    <select id="insert" parameterType="com.xiayu.demoCloud.provider.domain.User">
+        insert into user (id,username,password,name)
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+          #{name,jdbcType=VARCHAR})
+        </select>-->
+
+
+    <insert id="insert" parameterType="com.xiayu.demo.provicer.api.domain.UserLoginRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into user_login_record (
+    id,
+
+    create_time,
+    ip,
+    address,
+    user_agent,
+    reserve,
+    update_time,
+    del_flag,
+    version
+
+    )
+    values (
+    #{id,jdbcType=VARCHAR},
+
+    #{createTime,jdbcType=DATE},
+    #{ip,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR},
+    #{userAgent,jdbcType=VARCHAR},
+    #{reserve,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=DATE},
+    #{delFlag,jdbcType=INTEGER},
+    #{version,jdbcType=VARCHAR}
+
+    )
+    </insert >
+
+
+<!--    insert into user (
+ user_id,
+#{userId,jdbcType=VARCHAR},
+
+
+    id,
+    create_time,
+    ip,
+    address,
+    user_agent,
+    reserve,
+    update_time,
+    del_flag,
+    version
+    )
+    values (
+    #{id,jdbcType=VARCHAR},
+    #{createTime,jdbcType=DATE},
+    #{ip,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR},
+    #{userAgent,jdbcType=VARCHAR},
+    #{reserve,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=DATE},
+    #{delFlag,jdbcType=INTEGER},
+    #{version,jdbcType=VARCHAR}
+    )-->
+
+</mapper>

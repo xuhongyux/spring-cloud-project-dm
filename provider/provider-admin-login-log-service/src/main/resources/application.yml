@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-admin-provider
+    name: user-admin-provider-login-log
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -25,7 +25,7 @@ spring:
 
 dubbo:
   scan:
-    base-packages: com.xiayu.demo.provider.service
+    base-packages: com.xiayu.demo.provicer.service
   protocol:
     name: dubbo
     port: -1

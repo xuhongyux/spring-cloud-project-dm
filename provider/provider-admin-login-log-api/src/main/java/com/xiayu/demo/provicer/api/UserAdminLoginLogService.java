@@ -1,7 +1,7 @@
 package com.xiayu.demo.provicer.api;
 
 
-import com.xiayu.demo.provicer.api.domain.UserAdminLoginLog;
+import com.xiayu.demo.provicer.api.domain.UserLoginRecord;
 
 /**
  * 系统登录日志服务
@@ -16,9 +16,9 @@ public interface UserAdminLoginLogService {
     /**
      * 新增日志
      *
-     * @param userAdminLoginLog {@link UserAdminLoginLog }
+     * @param userAdminLoginLog {@link UserLoginRecord }
      * @return {@code int} 大于 0 则表示添加成功
      */
-    int insert(UserAdminLoginLog userAdminLoginLog);
+    int insert(UserLoginRecord userAdminLoginLog);
 
 }

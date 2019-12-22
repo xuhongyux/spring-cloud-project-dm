@@ -11,7 +11,7 @@
 
     <artifactId>provider-admin-login-log-api</artifactId>
     <packaging>jar</packaging>
-    <inceptionYear>2018-Now</inceptionYear>
+
 
     <licenses>
         <license>

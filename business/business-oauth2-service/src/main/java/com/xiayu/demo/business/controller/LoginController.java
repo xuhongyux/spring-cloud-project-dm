@@ -2,16 +2,24 @@ package com.xiayu.demo.business.controller;
 
 
 import com.google.common.collect.Maps;
+import com.xiayu.demo.business.BusinessException;
+import com.xiayu.demo.business.BusinessStatus;
 import com.xiayu.demo.business.dto.LoginInfo;
 import com.xiayu.demo.business.dto.LoginParam;
 import com.xiayu.demo.business.feign.ProfileFeign;
-import com.xiayu.demo.configuration.business.BusinessException;
-import com.xiayu.demo.configuration.business.BusinessStatus;
 import com.xiayu.demo.configuration.commons.dto.ResponseResult;
 import com.xiayu.demo.configuration.commons.utils.MapperUtils;
 import com.xiayu.demo.configuration.commons.utils.OkHttpClientUtil;
+import com.xiayu.demo.configuration.commons.utils.UserAgentUtils;
+import com.xiayu.demo.provicer.api.UserAdminLoginLogService;
+import com.xiayu.demo.provicer.api.domain.UserLoginRecord;
+import com.xiayu.demo.provider.api.UserAdminService;
 import com.xiayu.demo.provider.domain.User;
+import eu.bitwalker.useragentutils.Browser;
 import okhttp3.Response;
+import org.apache.dubbo.config.annotation.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -28,8 +36,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 登录管理login
@@ -61,6 +72,14 @@ public class LoginController {
     @Resource
     private ProfileFeign profileFeign;
 
+    @Reference(version = "1.0.0")
+    private UserAdminService userAdminService;
+
+    @Reference(version ="1.0.0")
+    private UserAdminLoginLogService userAdminLoginLogService;
+
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     @PostMapping(value = "/user/login")
     public ResponseResult login(@RequestBody LoginParam loginParam, HttpServletRequest request){
 
@@ -89,10 +108,11 @@ public class LoginController {
             result.put("token", token);
 
             // 发送登录日志
-           // sendAdminLoginLog(userDetails.getUsername(), request);
+            sendAdminLoginLog(userDetails.getUsername(), request);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.info("用户登录成功",loginParam.getUsername());
         return new ResponseResult<>(HttpStatus.OK.value(), "登录成功", result);
     }
     /**
@@ -104,8 +124,13 @@ public class LoginController {
         // 获取认证信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // 获取个人信息
+        // 注意这一步，如果触发熔断会返回上面定义好的固定结果
         String jsonString = profileFeign.info(authentication.getName());
         User umsAdmin = MapperUtils.json2pojoByTree(jsonString, "data", User.class);
+        // 按照熔断器给到的结果，此时 umsAdmin 为空，我们需要直接将熔断结果返回给客户端
+        if (umsAdmin == null) {
+            return MapperUtils.json2pojo(jsonString, ResponseResult.class);
+        }
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setName(authentication.getName());
         loginInfo.setNickName(umsAdmin.getUsername());
@@ -156,30 +181,32 @@ public class LoginController {
     }*/
 
 
-
-/*
-    *//**
+    /**
      * 发送登录日志
-     *
-     * @param request {@link HttpServletRequest}
-     *//*
+     * @param username
+     * @param request
+     */
     private void sendAdminLoginLog(String username, HttpServletRequest request) {
-        UmsAdmin umsAdmin = umsAdminService.get(username);
+        User user = userAdminService.get(username);
 
-        if (umsAdmin != null) {
+        if (user != null) {
+            //设置日期格式
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //new Date()为获取当前系统时间
             // 获取请求的用户代理信息
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             Browser browser = UserAgentUtils.getBrowser(request);
             String ip = UserAgentUtils.getIpAddr(request);
             String address = UserAgentUtils.getIpInfo(ip).getCity();
 
-            UmsAdminLoginLogDTO dto = new UmsAdminLoginLogDTO();
-            dto.setAdminId(umsAdmin.getId());
+            UserLoginRecord dto = new UserLoginRecord();
+            dto.setId(uuid);
+            //dto.setUserId(user.getId().toString());
             dto.setCreateTime(new Date());
             dto.setIp(ip);
             dto.setAddress(address);
             dto.setUserAgent(browser.getName());
-
-            messageService.sendAdminLoginLog(dto);
+            userAdminLoginLogService.insert(dto);
         }
-    }*/
+    }
 }

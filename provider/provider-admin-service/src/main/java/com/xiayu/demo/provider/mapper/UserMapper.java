@@ -2,13 +2,15 @@ package com.xiayu.demo.provider.mapper;
 
 
 import com.xiayu.demo.provider.domain.User;
+import feign.Param;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface UserMapper {
+
+
      List<User> queryUserList();
 
      User findUserById(@Param("Id") String Id);

@@ -4,6 +4,7 @@ package com.xiayu.demo.business.feign;
 import com.xiayu.demo.business.dto.params.IconParam;
 import com.xiayu.demo.business.dto.params.PasswordParam;
 import com.xiayu.demo.business.dto.params.ProfileParam;
+import com.xiayu.demo.business.feign.fallback.ProfileFeignFallback;
 import com.xiayu.demo.configuration.FeignRequestConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * </p>
  */
 //value 服务名称  path  请求服务 的Controller 的RequestMapping Value
-@FeignClient(value = "business-profile", path = "profile", configuration = FeignRequestConfiguration.class)
+@FeignClient(value = "business-profile", path = "profile", configuration = FeignRequestConfiguration.class, fallback = ProfileFeignFallback.class)
 public interface ProfileFeign {
 
     /**
@@ -27,8 +28,6 @@ public interface ProfileFeign {
      */
     @GetMapping(value = "info/{username}")
     String info(@PathVariable String username);
-
-
 
 
 

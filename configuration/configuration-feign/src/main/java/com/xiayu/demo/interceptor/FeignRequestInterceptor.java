@@ -17,6 +17,7 @@ import java.util.Enumeration;
  * </p>
  *
  */
+
 public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {

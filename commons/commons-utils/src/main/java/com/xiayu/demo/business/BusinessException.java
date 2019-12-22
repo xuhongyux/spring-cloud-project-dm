@@ -1,4 +1,4 @@
-package com.xiayu.demo.configuration.business;
+package com.xiayu.demo.business;
 
 /**
  * 全局业务异常

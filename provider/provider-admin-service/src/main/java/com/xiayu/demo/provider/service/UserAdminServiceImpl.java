@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.xiayu.demo.provider.api.UserAdminService;
 import com.xiayu.demo.provider.domain.User;
 import com.xiayu.demo.provider.mapper.UserMapper;
+import com.xiayu.demo.provider.service.fallback.UmsAdminServiceFallback;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -51,11 +52,9 @@ public class UserAdminServiceImpl implements UserAdminService {
      * @return {@link User}
      */
     @Override
-    //@SentinelResource(value = "getByUsername", fallback = "getByUsernameFallback", fallbackClass = UmsAdminServiceFallback.class)
+    //value 控制台显示的名称   fallback 熔断配置类的方法   fallbackClass  熔断配置类的类名
+    @SentinelResource(value = "getByUsername", fallback = "getByUsernameFallback", fallbackClass = UmsAdminServiceFallback.class)
     public User get(String username) {
-        //todo 熔断器
-      //  Example example = new Example(UmsAdmin.class);
-       // example.createCriteria().andEqualTo("username", username);
         User user = userMapper.findUerByName(username);
         return user;
     }

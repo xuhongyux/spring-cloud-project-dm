@@ -44,10 +44,5 @@
             <artifactId>javax.persistence-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>

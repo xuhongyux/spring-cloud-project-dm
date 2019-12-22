@@ -171,13 +171,21 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- Projects End -->
+        <dependency>
+            <groupId>com.xiayu.project.demo</groupId>
+            <artifactId>provider-admin-login-log-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
-<!--        &lt;!&ndash;redis 引入&ndash;&gt;
+        <!--redis引入-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>-->
+        </dependency>
+
+        <!-- Projects End -->
+
+
 
     </dependencies>
     <build>
@@ -186,7 +194,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.funtl.myshop.plus.business.BusinessOAuth2Application</mainClass>
+                    <mainClass>com.xiayu.demo.business.BusinessOAuth2Application</mainClass>
                 </configuration>
             </plugin>
         </plugins>
