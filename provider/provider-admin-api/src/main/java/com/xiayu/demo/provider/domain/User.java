@@ -1,10 +1,12 @@
 package com.xiayu.demo.provider.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
-import java.util.Date;
+
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Data
@@ -22,11 +24,13 @@ public class User implements Serializable{
     /**
      * 创建时间
      */
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 最后登录时间
      */
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date loginTime;
 
     /**

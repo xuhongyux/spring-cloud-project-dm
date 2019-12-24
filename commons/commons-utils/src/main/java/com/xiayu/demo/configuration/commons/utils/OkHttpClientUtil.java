@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
  * Description:
  * </p>
  *
-
  */
 public class OkHttpClientUtil {
     private static final int READ_TIMEOUT = 100;

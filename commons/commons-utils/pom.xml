@@ -11,8 +11,7 @@
 
     <artifactId>commons-utils</artifactId>
     <packaging>jar</packaging>
-    <url>http://www.funtl.com</url>
-    <inceptionYear>2018-Now</inceptionYear>
+
 
     <licenses>
         <license>

@@ -12,7 +12,6 @@
     <artifactId>business</artifactId>
     <packaging>pom</packaging>
 
-
     <licenses>
         <license>
             <name>Apache 2.0</name>
@@ -69,16 +68,7 @@
             <artifactId>configuration-feign</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <!--//todo -->
-     <!--   <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>-->
     </dependencies>
 
     <modules>
